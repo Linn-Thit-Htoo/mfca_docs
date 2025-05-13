@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modular Feature-Based Clean Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold text-indigo-700 mb-2">
+          Modular Feature-Based Clean Architecture (MFCA)
+        </h1>
+        <p class="text-lg text-gray-600">
+          A modern approach to scalable and maintainable monoliths.
+        </p>
+      </header>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          1. Introduction
+        </h2>
+        <p>
+          MFCA is a pragmatic backend architecture that combines Domain Driven
+          Design (DDD) principles, Clean Architecture, REPR Pattern, Vertical
+          Slice Architecture and N Layer Architecture.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          2. Architectural Goals
+        </h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>🧩 Feature Modularity</li>
+          <li>🧠 Domain Modeling</li>
+          <li>🧪 Make unit testing easier</li>
+          <li>⚡ Less Complexity than CQRS</li>
+          <li>🚀 Scalable and Easy to Maintain</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          3. Project Structure
+        </h2>
+        <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
+csharp_mfca.API/
+├── Configurations/
+├── Constants/
+├── Entities/
+├── Exceptions/
+├── Extensions/
+├── Features/
+│   ├── Core/
+│   ├── Users/
+│   │   ├── Core/
+│   │   └── CreateUser/
+├── Models/
+├── Middlewares/
+├── Persistence/
+│   ├── Base/
+│   ├── Wrapper/
+├── Resources/
+├── Services/
+├── Utils/
+├── Program.cs / Dockerfile
+      </pre
+        >
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          4. Layers & Responsibilities
+        </h2>
+        <table class="w-full text-left table-auto border">
+          <thead>
+            <tr class="bg-indigo-100">
+              <th class="p-2 border">Layer</th>
+              <th class="p-2 border">Responsibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border">Configurations</td>
+              <td class="p-2 border">
+                Manages application settings efficiently using the
+                <strong>Options Pattern</strong>, ensuring type safety and
+                reducing the risk of spelling errors or misconfigurations across
+                the codebase.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Constants</td>
+              <td class="p-2 border">
+                This is where the application constants and enum exist.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Entities</td>
+              <td class="p-2 border">
+                The main entities of the application if we are using one DB
+                instance.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Exceptions</td>
+              <td class="p-2 border">
+                This is where we can implement custom exceptions and global
+                handlers.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Extensions</td>
+              <td class="p-2 border">
+                Custom implementation of extensions including Mapper, Extension
+                and DI extensions.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Features</td>
+              <td class="p-2 border">
+                Encapsulated domain features, Request DTOs, Response DTOs
+                validators, and service calls.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Models</td>
+              <td class="p-2 border">
+                Domain entities used across features including aggregates.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Middlewares</td>
+              <td class="p-2 border">
+                Custom middlewares for interception and custom logic.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Persistence</td>
+              <td class="p-2 border">
+                Generic Repository Pattern, Unit Of Work Pattern lie in this
+                layer. Also, ORM integration can be found there.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Resources</td>
+              <td class="p-2 border">We can add localization here.</td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Services</td>
+              <td class="p-2 border">
+                Shared services like Fluent Email, JWT, AES, S3, SES, SNS, etc.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Utils</td>
+              <td class="p-2 border">
+                Mainly BaseResponseModel for consistent API response.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          8. Testing Strategy
+        </h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Unit test business logic</li>
+          <li>Validate DTOs with FluentValidation</li>
+          <li>Integration tests via controllers and DB context</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          9. Advantages Over CQRS
+        </h2>
+        <table class="w-full text-left table-auto border">
+          <thead>
+            <tr class="bg-indigo-100">
+              <th class="p-2 border">Traditional CQRS</th>
+              <th class="p-2 border">MFCA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border">Two separate commands and queries</td>
+              <td class="p-2 border">
+                Request/Response DTOs under the slice and aggregates under the
+                Core if needed.
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Dual databases or projection layers</td>
+              <td class="p-2 border">Single DB with layered access</td>
+            </tr>
+            <tr>
+              <td class="p-2 border">Heavy setup and boilerplate</td>
+              <td class="p-2 border">Minimal overhead, fast development</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-indigo-600 mb-4">
+          10. Extensibility
+        </h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Scale individual features as needed.</li>
+          <li>Easily integrate MediatR, background jobs, etc.</li>
+          <li>Future migration to microservices possible per feature.</li>
+        </ul>
+      </section>
+
+      <footer class="text-center text-sm text-gray-500 mt-12">
+        &copy; 2025 Linn Thit Htoo – Modular Feature-Based Clean Architecture
+        v1.0
+      </footer>
+    </div>
+  </body>
+</html>
